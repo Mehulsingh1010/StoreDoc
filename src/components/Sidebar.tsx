@@ -5,7 +5,13 @@ import { navItems } from "../../constants";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 
-const Sidebar = ({ fullName, avatar, email }: Props) => {
+interface SidebarProps {
+  fullName: string;
+  email: string;
+  avatar?: string;
+}
+
+const Sidebar = ({ fullName, email, avatar }: SidebarProps) => {
   const pathname = usePathname();
 
   return (
@@ -18,7 +24,6 @@ const Sidebar = ({ fullName, avatar, email }: Props) => {
           height={50}
           className="hidden h-auto lg:block"
         />
-
         <Image
           src="/assets/icons/logo-brand.svg"
           alt="logo"
@@ -27,7 +32,6 @@ const Sidebar = ({ fullName, avatar, email }: Props) => {
           className="lg:hidden"
         />
       </Link>
-
       <nav className="sidebar-nav">
         <ul className="flex flex-1 flex-col gap-6">
           {navItems.map(({ url, name, icon }) => (
@@ -56,7 +60,6 @@ const Sidebar = ({ fullName, avatar, email }: Props) => {
           ))}
         </ul>
       </nav>
-
       <Image
         src="/assets/images/files-2.png"
         alt="logo"
@@ -64,21 +67,21 @@ const Sidebar = ({ fullName, avatar, email }: Props) => {
         height={418}
         className="w-full"
       />
-
       <div className="sidebar-user-info">
         <Image
-          src={avatar || "https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg"} // Set a default image path here
+          src={avatar || "https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg"} // Update this to your actual default avatar path
           alt="Avatar"
           width={44}
           height={44}
           className="sidebar-user-avatar"
         />
         <div className="hidden lg:block">
-          <p className="subtitle-2 capitalize">{fullName}</p>
-          <p className="caption">{email}</p>
+          {fullName && <p className="subtitle-2 capitalize">{fullName}</p>}
+          {email && <p className="caption">{email}</p>}
         </div>
       </div>
     </aside>
   );
 };
+
 export default Sidebar;
