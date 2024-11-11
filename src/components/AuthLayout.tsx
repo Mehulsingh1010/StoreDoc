@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { getCurrentUser } from '@/lib/actions/user.action';
 
 const AuthLayout = ({ children }: { children: React.ReactNode }) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [user, setUser] = useState<{
     fullName: string;
     email: string;

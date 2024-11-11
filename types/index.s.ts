@@ -3,68 +3,85 @@
 
 import { Models } from "node-appwrite";
 
-export declare type FileType = "document" | "image" | "video" | "audio" | "other";
+// Define the missing SegmentParams interface
+interface SegmentParams {
+  // Add properties as needed for your segment parameters
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [key: string]: any;
+}
 
-declare interface ActionType {
+// File related types
+export type FileType = "document" | "image" | "video" | "audio" | "other";
+
+// Action related interfaces
+export interface ActionType {
   label: string;
   icon: string;
   value: string;
 }
 
-declare interface SearchParamProps {
+// Search and Navigation related interfaces
+export interface SearchParamProps {
   params?: Promise<SegmentParams>;
   searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
-export declare interface UploadFileProps {
+export interface MobileNavigationProps {
+  ownerId: string;
+  accountId: string;
+  fullName: string;
+  avatar: string;
+  email: string;
+}
+
+export interface SidebarProps {
+  fullName: string;
+  avatar: string;
+  email: string;
+}
+
+// File operation interfaces
+export interface UploadFileProps {
   file: File;
   ownerId: string;
   accountId: string;
   path: string;
 }
-export declare interface GetFilesProps {
+
+export interface GetFilesProps {
   types: FileType[];
   searchText?: string;
   sort?: string;
   limit?: number;
 }
-export declare interface RenameFileProps {
+
+export interface RenameFileProps {
   fileId: string;
   name: string;
   extension: string;
   path: string;
 }
-export declare interface UpdateFileUsersProps {
+
+export interface UpdateFileUsersProps {
   fileId: string;
   emails: string[];
   path: string;
 }
-export declare interface DeleteFileProps {
+
+export interface DeleteFileProps {
   fileId: string;
   bucketFileId: string;
   path: string;
 }
 
-export declare interface FileUploaderProps {
+// UI Component interfaces
+export interface FileUploaderProps {
   ownerId: string;
   accountId: string;
   className?: string;
 }
 
-export declare interface MobileNavigationProps {
-  ownerId: string;
-  accountId: string;
-  fullName: string;
-  avatar: string;
-  email: string;
-}
-export declare interface SidebarProps {
-  fullName: string;
-  avatar: string;
-  email: string;
-}
-
-export declare interface ThumbnailProps {
+export interface ThumbnailProps {
   type: string;
   extension: string;
   url: string;
@@ -72,7 +89,7 @@ export declare interface ThumbnailProps {
   imageClassName?: string;
 }
 
-export declare interface ShareInputProps {
+export interface ShareInputProps {
   file: Models.Document;
   onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onRemove: (email: string) => void;
