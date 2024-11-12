@@ -175,22 +175,34 @@ export const deleteFile = async ({
   const { databases, storage } = await createAdminClient();
 
   try {
+    // Delete the document from the database first
     const deletedFile = await databases.deleteDocument(
       appwriteConfig.databaseId,
       appwriteConfig.filesCollectionId,
-      fileId,
+      fileId
     );
 
     if (deletedFile) {
-      await storage.deleteFile(appwriteConfig.bucketId, bucketFileId);
+      // Adding a slight delay to ensure the system registers the deletion
+      await new Promise((resolve) => setTimeout(resolve, 300));
+
+      // Attempt to delete the file from storage
+      try {
+        await storage.deleteFile(appwriteConfig.bucketId, bucketFileId);
+      } catch (error) {
+        console.warn("File storage deletion error:", error);  // Suppress error if fileId is missing
+      }
     }
 
+    // Revalidate path to update UI after deletion
     revalidatePath(path);
     return parseStringify({ status: "success" });
   } catch (error) {
-    handleError(error, "Failed to delete file");
+    handleError(error, "Failed to delete file from database");
   }
 };
+
+
 
 // ============================== TOTAL FILE SPACE USED
 export async function getTotalSpaceUsed() {

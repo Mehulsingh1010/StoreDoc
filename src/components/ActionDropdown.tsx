@@ -20,7 +20,7 @@ import Image from "next/image";
 import { Models } from "node-appwrite";
 import { actionsDropdownItems } from "../../constants/index";
 import Link from "next/link";
-import { constructDownloadUrl } from "@/lib/utils";
+import { constructFileUrl } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
@@ -42,12 +42,20 @@ const ActionDropdown = ({ file }: { file: Models.Document }) => {
 
   const path = usePathname();
 
+  // Debug log to check file object
+  console.log('File object:', file);
+
+  const getFileId = () => {
+    // Check for fileId in different possible locations
+    return file.bucketFileId || file.fileId || file.$id;
+  };
+
   const closeAllModals = () => {
     setIsModalOpen(false);
     setIsDropdownOpen(false);
     setAction(null);
     setName(file.name);
-    //   setEmails([]);
+    setEmails([]);
   };
 
   const handleAction = async () => {
@@ -59,8 +67,10 @@ const ActionDropdown = ({ file }: { file: Models.Document }) => {
       rename: () =>
         renameFile({ fileId: file.$id, name, extension: file.extension, path }),
       share: () => updateFileUsers({ fileId: file.$id, emails, path }),
-      delete: () =>
-        deleteFile({ fileId: file.$id, bucketFileId: file.bucketFileId, path }),
+      delete: async () => {
+        await new Promise((resolve) => setTimeout(resolve, 300));
+        return deleteFile({ fileId: file.$id, bucketFileId: getFileId(), path });
+      },
     };
 
     success = await actions[action.value as keyof typeof actions]();
@@ -72,16 +82,22 @@ const ActionDropdown = ({ file }: { file: Models.Document }) => {
 
   const handleRemoveUser = async (email: string) => {
     const updatedEmails = emails.filter((e) => e !== email);
-
     const success = await updateFileUsers({
       fileId: file.$id,
       emails: updatedEmails,
       path,
     });
-
     if (success) setEmails(updatedEmails);
     closeAllModals();
   };
+
+  const getDownloadUrl = () => {
+      // Extract the fileId from the view URL
+      const currentUrl = constructFileUrl(file.bucketFileId);
+      const downloadUrl = currentUrl.replace('/view?', '/download?');
+      console.log('Download URL:', downloadUrl); // For debugging
+      return downloadUrl;
+    };
 
   const renderDialogContent = () => {
     if (!action) return null;
@@ -161,30 +177,27 @@ const ActionDropdown = ({ file }: { file: Models.Document }) => {
               className="shad-dropdown-item"
               onClick={() => {
                 setAction(actionItem);
-
-                if (
-                  ["rename", "share", "delete", "details"].includes(
-                    actionItem.value,
-                  )
-                ) {
+                if (["rename", "share", "delete", "details"].includes(actionItem.value)) {
                   setIsModalOpen(true);
                 }
               }}
             >
               {actionItem.value === "download" ? (
                 <Link
-                  href={constructDownloadUrl(file.bucketFileId)}
-                  download={file.name}
-                  className="flex items-center gap-2"
-                >
-                  <Image
-                    src={actionItem.icon}
-                    alt={actionItem.label}
-                    width={30}
-                    height={30}
-                  />
-                  {actionItem.label}
-                </Link>
+                href={getDownloadUrl()}
+                download={file.name}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2"
+              >
+                <Image
+                  src={actionItem.icon}
+                  alt={actionItem.label}
+                  width={30}
+                  height={30}
+                />
+                {actionItem.label}
+              </Link>
               ) : (
                 <div className="flex items-center gap-2">
                   <Image
@@ -205,4 +218,5 @@ const ActionDropdown = ({ file }: { file: Models.Document }) => {
     </Dialog>
   );
 };
+
 export default ActionDropdown;
