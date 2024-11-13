@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client"
 import Image from "next/image";
 import Link from "next/link";
@@ -18,11 +19,11 @@ const Sidebar = ({ fullName, email, avatar }: SidebarProps) => {
     <aside className="sidebar">
       <Link href="/">
         <Image
-          src="/assets/icons/logo-full-brand.svg"
+          src="/Sidebarlogo.png"
           alt="logo"
-          width={160}
-          height={50}
-          className="hidden h-auto lg:block"
+          width={200}
+          height={100}
+          className="hidden h-auto ml-[10px] lg:block"
         />
         <Image
           src="/assets/icons/logo-brand.svg"
@@ -67,7 +68,7 @@ const Sidebar = ({ fullName, email, avatar }: SidebarProps) => {
         height={418}
         className="w-full"
       />
-      <div className="sidebar-user-info">
+      {/* <div className="sidebar-user-info">
         <Image
           src={avatar || "https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg"} // Update this to your actual default avatar path
           alt="Avatar"
@@ -79,7 +80,7 @@ const Sidebar = ({ fullName, email, avatar }: SidebarProps) => {
           {fullName && <p className="subtitle-2 capitalize">{fullName}</p>}
           {email && <p className="caption">{email}</p>}
         </div>
-      </div>
+      </div> */}
     </aside>
   );
 };

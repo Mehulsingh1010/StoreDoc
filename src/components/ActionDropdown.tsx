@@ -20,7 +20,6 @@ import Image from "next/image";
 import { Models } from "node-appwrite";
 import { actionsDropdownItems } from "../../constants/index";
 import Link from "next/link";
-import { constructFileUrl } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
@@ -31,6 +30,7 @@ import {
 import { usePathname } from "next/navigation";
 import { FileDetails, ShareInput } from "@/components/ActionsModalContent";
 import { ActionType } from "../../types/index.s";
+import { constructDownloadUrl } from "@/lib/utils";
 
 const ActionDropdown = ({ file }: { file: Models.Document }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -91,13 +91,7 @@ const ActionDropdown = ({ file }: { file: Models.Document }) => {
     closeAllModals();
   };
 
-  const getDownloadUrl = () => {
-      // Extract the fileId from the view URL
-      const currentUrl = constructFileUrl(file.bucketFileId);
-      const downloadUrl = currentUrl.replace('/view?', '/download?');
-      console.log('Download URL:', downloadUrl); // For debugging
-      return downloadUrl;
-    };
+ 
 
   const renderDialogContent = () => {
     if (!action) return null;
@@ -183,21 +177,19 @@ const ActionDropdown = ({ file }: { file: Models.Document }) => {
               }}
             >
               {actionItem.value === "download" ? (
-                <Link
-                href={getDownloadUrl()}
-                download={file.name}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2"
-              >
-                <Image
-                  src={actionItem.icon}
-                  alt={actionItem.label}
-                  width={30}
-                  height={30}
-                />
-                {actionItem.label}
-              </Link>
+                 <Link
+                 href={constructDownloadUrl(file.bucketFileId)}
+                 download={file.name}
+                 className="flex items-center gap-2"
+               >
+                 <Image
+                   src={actionItem.icon}
+                   alt={actionItem.label}
+                   width={30}
+                   height={30}
+                 />
+                 {actionItem.label}
+               </Link>
               ) : (
                 <div className="flex items-center gap-2">
                   <Image

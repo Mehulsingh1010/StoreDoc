@@ -39,12 +39,12 @@ const MobileNavigation = ({
   const avatarSrc = avatar || "https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg";
 
   return (
-    <header className="mobile-header">
+    <header className="ml-[4px] mobile-header">
       {/* Logo */}
       <Image
-        src="/assets/icons/logo-full-brand.svg"
+        src="/Sidebarlogo.png"
         alt="logo"
-        width={120}
+        width={150}
         height={52}
         className="h-auto"
         priority
