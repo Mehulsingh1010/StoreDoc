@@ -31,10 +31,10 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       <section className="flex flex-1 flex-col bg-white">
         <div className="mb-16 p-4 lg:hidden">
           <Image
-            src="/assets/icons/logo-full-brand.svg"
+            src="/Sidebarlogo.png"
             alt="logo"
-            width={224}
-            height={82}
+            width={260}
+            height={100}
             className="h-auto w-[200px] lg:w-[250px]"
           />
         </div>

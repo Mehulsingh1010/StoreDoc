@@ -23,7 +23,7 @@ const Sidebar = ({ fullName, email, avatar }: SidebarProps) => {
           alt="logo"
           width={200}
           height={100}
-          className="hidden h-auto ml-[10px] lg:block"
+          className="hidden h-auto mt-[-16px] ml-[10px] lg:block"
         />
         <Image
           src="/assets/icons/logo-brand.svg"
