@@ -21,9 +21,14 @@ const Header = ({ userId, accountId, fullName, email, avatar }: HeaderProps) => 
   };
 
   return (
-    <header className="header">
-      <Search />
-      <div className=" sidebar-user-info">
+    <header className="header flex flex-col lg:flex-row justify-between items-center p-4">
+      {/* Search bar */}
+      <div className="flex-grow mb-4 lg:mb-0">
+        <Search />
+      </div>
+      
+      {/* User info section */}
+      <div className="flex items-center  space-x-4 mb-4 lg:mb-0">
         <Image
           src={
             avatar ||
@@ -32,23 +37,26 @@ const Header = ({ userId, accountId, fullName, email, avatar }: HeaderProps) => 
           alt="Avatar"
           width={44}
           height={44}
-          className="sidebar-user-avatar"
+          className="sidebar-user-avatar rounded-full"
         />
         <div className="hidden lg:block">
           {fullName && <p className="subtitle-2 capitalize">{fullName}</p>}
           {email && <p className="caption">{email}</p>}
         </div>
       </div>
-      <div className="header-wrapper">
+
+      {/* File uploader and sign-out */}
+      <div className="flex items-center space-x-4">
         <FileUploader ownerId={userId} accountId={accountId} />
+        
         <form onSubmit={handleSignOut}>
-          <Button type="submit" className="sign-out-button">
+          <Button type="submit" className="sign-out-button p-2 rounded-md bg-red-600 hover:bg-red-700">
             <Image
               src="/assets/icons/logout.svg"
-              alt="logo"
+              alt="Sign Out"
               width={24}
               height={24}
-              className="w-6"
+              className="w-6 h-6"
             />
           </Button>
         </form>
