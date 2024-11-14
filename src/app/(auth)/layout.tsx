@@ -5,7 +5,7 @@ import React from "react";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="flex min-h-screen">
+    <div className="flex min-h-screen ovf">
       <section className="hidden w-1/2 items-center justify-center bg-brand p-10 lg:flex xl:w-2/5">
         <div className="flex max-h-[800px] max-w-[430px] flex-col justify-center space-y-12">
           <div className="flex justify-center">
@@ -43,8 +43,8 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           />
         </div>
 
-        <div className="flex flex-1 items-center justify-center px-8 pb-10 pt-0 lg:px-16 xl:px-20">
-          <div className="w-full max-w-[400px] space-y-6 p-6 shadow-md sm:p-8">
+        <div className="flex overflow-hidden flex-1 items-center justify-center px-8 pb-10 pt-0 lg:px-16 xl:px-20">
+          <div className="w-full max-w-[400px] space-y-6 p-6  sm:p-8">
             <div className="flex justify-center">
               <Image
                 src="/authlogo.png"
