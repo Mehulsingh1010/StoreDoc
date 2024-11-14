@@ -1,10 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-"use client"
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import { navItems } from "../../constants";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
+import { Github, Linkedin, Mail } from 'lucide-react';
+import { useState } from "react";
 
 interface SidebarProps {
   fullName: string;
@@ -14,16 +16,26 @@ interface SidebarProps {
 
 const Sidebar = ({ fullName, email, avatar }: SidebarProps) => {
   const pathname = usePathname();
+  const [copySuccess, setCopySuccess] = useState("");
+
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(email)
+      .then(() => {
+        setCopySuccess("Email copied!");
+        setTimeout(() => setCopySuccess(""), 2000); // Reset message after 2 seconds
+      })
+      .catch((err) => console.error("Failed to copy email:", err));
+  };
 
   return (
     <aside className="sidebar">
       <Link href="/">
         <Image
-          src="/Sidebarlogo.png"
+          src="/newlogo.png"
           alt="logo"
           width={200}
           height={100}
-          className="hidden h-auto mt-[-16px] ml-[10px] lg:block"
+          className="hidden h-auto mb-[-14px] mt-[-9.5px] ml-[10px] lg:block"
         />
         <Image
           src="/assets/icons/logo-brand.svg"
@@ -39,7 +51,7 @@ const Sidebar = ({ fullName, email, avatar }: SidebarProps) => {
             <Link key={name} href={url} className="lg:w-full">
               <li
                 className={cn(
-                  "sidebar-nav-item",
+                  "sidebar-nav-item hover:bg-brand-100 ",
                   pathname === url && "shad-active",
                 )}
               >
@@ -61,26 +73,55 @@ const Sidebar = ({ fullName, email, avatar }: SidebarProps) => {
           ))}
         </ul>
       </nav>
-      <Image
-        src="/assets/images/files-2.png"
-        alt="logo"
-        width={506}
-        height={418}
-        className="w-full"
-      />
-      {/* <div className="sidebar-user-info">
+      
+      {/* Powered by Appwrite */}
+      <div className="flex flex-row items-center mt-4 mb-4">
         <Image
-          src={avatar || "https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg"} // Update this to your actual default avatar path
-          alt="Avatar"
-          width={44}
-          height={44}
-          className="sidebar-user-avatar"
+          src="/appwrite.png"  // Ensure this path points to the Appwrite logo in your assets
+          alt="Appwrite Logo"
+          width={100}
+          height={30}
+          className="mb-2"
         />
-        <div className="hidden lg:block">
-          {fullName && <p className="subtitle-2 capitalize">{fullName}</p>}
-          {email && <p className="caption">{email}</p>}
-        </div>
-      </div> */}
+        <p className="text-gray-500 text-sm">Powered by Appwrite</p>
+      </div>
+
+      {/* Contact Section */}
+      <div className="mt-auto p-4 bg-[#0066FF] rounded-2xl">
+        <h3 className="text-lg font-medium mb-4 text-white hidden lg:block">Let&apos;s Connect ;)</h3>
+        <ul className="flex flex-col gap-3">
+          <Link 
+            href="https://github.com/mehulsingh1010" 
+            target="_blank" 
+            rel="noopener noreferrer"
+          >
+            <li className="flex items-center gap-3 text-white hover:opacity-80 transition-opacity">
+              <Github size={20} />
+              <p className="hidden lg:block text-sm">GitHub</p>
+            </li>
+          </Link>
+          <Link 
+            href="https://www.linkedin.com/in/mehul-singh-73154b251/" 
+            target="_blank" 
+            rel="noopener noreferrer"
+          >
+            <li className="flex items-center gap-3 text-white hover:opacity-80 transition-opacity">
+              <Linkedin size={20} />
+              <p className="hidden lg:block text-sm">LinkedIn</p>
+            </li>
+          </Link>
+          <li 
+            onClick={copyToClipboard} 
+            className="flex items-center gap-3 text-white cursor-pointer hover:opacity-80 transition-opacity"
+          >
+            <Mail size={20} />
+            <p className="hidden lg:block text-sm">Email</p>
+          </li>
+          {copySuccess && (
+            <p className="text-sm text-brand-100 mt-1">{copySuccess}</p>
+          )}
+        </ul>
+      </div>
     </aside>
   );
 };

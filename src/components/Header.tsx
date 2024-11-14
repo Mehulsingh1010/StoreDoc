@@ -28,7 +28,7 @@ const Header = ({ userId, accountId, fullName, email, avatar }: HeaderProps) => 
       </div>
       
       {/* User info section */}
-      <div className="flex items-center  space-x-4 mb-4 lg:mb-0">
+      <div className="flex items-center bg-brand-100 p-[10px] rounded-full space-x-4 mb-4 lg:mb-0">
         <Image
           src={
             avatar ||
@@ -37,7 +37,7 @@ const Header = ({ userId, accountId, fullName, email, avatar }: HeaderProps) => 
           alt="Avatar"
           width={44}
           height={44}
-          className="sidebar-user-avatar rounded-full"
+          className="sidebar-user-avatar  rounded-full"
         />
         <div className="hidden lg:block">
           {fullName && <p className="subtitle-2 capitalize">{fullName}</p>}
