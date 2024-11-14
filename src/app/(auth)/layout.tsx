@@ -5,7 +5,7 @@ import React from "react";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="flex min-h-screen ovf">
+    <div className="flex min-h-screen max-h-screen overflow-hidden">
       <section className="hidden w-1/2 items-center justify-center bg-brand p-10 lg:flex xl:w-2/5">
         <div className="flex max-h-[800px] max-w-[430px] flex-col justify-center space-y-12">
           <div className="flex justify-center">
@@ -32,7 +32,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         </div>
       </section>
 
-      <section className="flex flex-1 flex-col bg-white">
+      <section className="flex flex-1 flex-col bg-white max-h-screen">
         <div className="flex justify-center mb-4 pt-8 lg:hidden">
           <Image
             src="/Sidebarlogo.png"
@@ -43,8 +43,8 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           />
         </div>
 
-        <div className="flex overflow-hidden flex-1 items-center justify-center px-8 pb-10 pt-0 lg:px-16 xl:px-20">
-          <div className="w-full max-w-[400px] space-y-6 p-6  sm:p-8">
+        <div className="flex flex-1 items-center justify-center px-8 pb-10 pt-0 lg:px-16 xl:px-20 overflow-y-auto">
+          <div className="w-full max-w-[400px] space-y-6 p-6 sm:p-8">
             <div className="flex justify-center">
               <Image
                 src="/authlogo.png"
@@ -54,7 +54,6 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                 className="h-auto white"
               />
             </div>
-            {/* <h2 className="text-2xl font-bold text-brand">Sign Up</h2> */}
             {children}
           </div>
         </div>
