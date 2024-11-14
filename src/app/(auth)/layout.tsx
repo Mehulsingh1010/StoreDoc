@@ -5,7 +5,7 @@ import React from "react";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="flex min-h-screen max-h-screen overflow-hidden">
+    <div className="fixed inset-0 flex flex-col lg:flex-row">
       <section className="hidden w-1/2 items-center justify-center bg-brand p-10 lg:flex xl:w-2/5">
         <div className="flex max-h-[800px] max-w-[430px] flex-col justify-center space-y-12">
           <div className="flex justify-center">
@@ -32,8 +32,8 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         </div>
       </section>
 
-      <section className="flex flex-1 flex-col bg-white max-h-screen">
-        <div className="flex justify-center mb-4 pt-8 lg:hidden">
+      <section className="flex flex-1 flex-col bg-white">
+        <div className="flex h-20 justify-center items-center lg:hidden">
           <Image
             src="/Sidebarlogo.png"
             alt="logo"
@@ -43,7 +43,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           />
         </div>
 
-        <div className="flex flex-1 items-center justify-center px-8 pb-10 pt-0 lg:px-16 xl:px-20 overflow-y-auto">
+        <div className="flex-1 flex items-center justify-center px-8 lg:px-16 xl:px-20">
           <div className="w-full max-w-[400px] space-y-6 p-6 sm:p-8">
             <div className="flex justify-center">
               <Image
