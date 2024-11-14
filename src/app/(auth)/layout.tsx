@@ -59,7 +59,11 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         </div>
       </section>
 
-      <style jsx>{`
+      <style jsx global>{`
+        body {
+          overflow: hidden;
+        }
+        
         @media (max-width: 767px) {
           .h1 {
             font-size: 1.75rem;
@@ -69,6 +73,13 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           }
           .shadow-md {
             box-shadow: none;
+          }
+          ::-webkit-scrollbar {
+            display: none;
+          }
+          * {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
           }
         }
       `}</style>
