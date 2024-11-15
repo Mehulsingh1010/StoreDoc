@@ -28,7 +28,7 @@ const Header = ({ userId, accountId, fullName, email, avatar }: HeaderProps) => 
       </div>
       
       {/* User info section */}
-      <div className="flex items-center bg-brand-100 p-[10px] rounded-full space-x-4 mb-4 lg:mb-0">
+      <div className="flex items-center bg-brand-100 p-2 rounded-full space-x-4 mb-4 lg:mb-0">
         <Image
           src={
             avatar ||

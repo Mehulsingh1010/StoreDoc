@@ -53,7 +53,7 @@ const MobileNavigation = ({
     <header className="ml-[4px] mobile-header">
       {/* Logo */}
       <Image
-        src="/Sidebarlogo.png"
+        src="/newlogo.png"
         alt="logo"
         width={150}
         height={52}

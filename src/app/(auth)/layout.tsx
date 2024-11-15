@@ -35,23 +35,23 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       <section className="flex flex-1 flex-col bg-white">
         <div className="flex h-20 justify-center items-center lg:hidden">
           <Image
-            src="/Sidebarlogo.png"
+            src="/newlogo.png"
             alt="logo"
             width={260}
             height={100}
-            className="h-auto w-[200px] lg:w-[250px]"
+            className="h-auto mt-20 w-[200px] lg:w-[250px]"
           />
         </div>
 
-        <div className="flex-1 flex items-center justify-center px-8 lg:px-16 xl:px-20">
-          <div className="w-full max-w-[400px] space-y-6 p-6 sm:p-8">
+        <div className="flex-1  flex items-center justify-center px-8 lg:px-16 xl:px-20">
+          <div className="w-full max-w-[400px] space-y-6  p-6 sm:p-8">
             <div className="flex justify-center">
               <Image
                 src="/authlogo.png"
                 alt="logo"
                 width={150}
                 height={49}
-                className="h-auto white"
+                className="h-auto  white"
               />
             </div>
             {children}

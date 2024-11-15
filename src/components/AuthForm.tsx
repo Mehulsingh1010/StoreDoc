@@ -147,7 +147,7 @@ const AuthForm = ({ type }: { type: FormType }) => {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <div className="shad-form-item">
+                <div className="shad-form-item  ">
                   <FormLabel className="shad-form-label">Email</FormLabel>
                   <FormControl>
                     <Input
