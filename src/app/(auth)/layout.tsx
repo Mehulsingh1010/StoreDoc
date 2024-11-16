@@ -4,7 +4,7 @@ import { Card } from "@/components/ui/card"
 import { FileSearch, Folder, FolderSearch, Search } from 'lucide-react'
 import Image from "next/image"
 import Link from "next/link"
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 
 export default function Component({ children }: { children: React.ReactNode }) {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
@@ -56,7 +56,7 @@ export default function Component({ children }: { children: React.ReactNode }) {
 
               {/* Main card */}
               <Card 
-                className={`relative h-full overflow-hidden border-white/10 bg-white/10 p-8 backdrop-blur-sm transition-transform duration-700 ease-out ${
+                className={`relative overflow-hidden border-white/10 bg-white/10 p-8 backdrop-blur-sm transition-transform duration-700 ease-out ${
                   isHovered ? 'rotate-x-12' : 'rotate-x-0'
                 }`}
               >
