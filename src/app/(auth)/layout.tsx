@@ -4,7 +4,7 @@ import { Card } from "@/components/ui/card"
 import { FileSearch, Folder, FolderSearch, Search } from 'lucide-react'
 import Image from "next/image"
 import Link from "next/link"
-import React, { useEffect, useState } from "react"
+import React, {useState } from "react"
 
 export default function Component({ children }: { children: React.ReactNode }) {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
