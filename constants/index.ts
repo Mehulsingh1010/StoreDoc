@@ -43,11 +43,6 @@ export const navItems = [
       value: "share",
     },
     {
-      label: "Download",
-      icon: "/assets/icons/download.svg",
-      value: "download",
-    },
-    {
       label: "Delete",
       icon: "/assets/icons/delete.svg",
       value: "delete",
