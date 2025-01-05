@@ -56,7 +56,7 @@ export default function Component({ children }: { children: React.ReactNode }) {
 
               {/* Main card */}
               <Card 
-                className={`relative overflow-hidden border-white/10 bg-white/10 p-8 backdrop-blur-sm transition-transform duration-700 ease-out ${
+                className={`relative overflow-hidden h-full border-white/10 bg-white/10 p-8 backdrop-blur-sm transition-transform duration-700 ease-out ${
                   isHovered ? 'rotate-x-12' : 'rotate-x-0'
                 }`}
               >
